@@ -97,21 +97,21 @@ do
     local setCommandBarOpen = function(isOpen)
         if isOpen == true then
             commandBar.Input:CaptureFocus()
-            spawn(
+            task.spawn(
                 function()
                     repeat
                         commandBar.Input.Text = ""
                     until commandBar.Input.Text == ""
                 end
             )
-            spawn(
+            task.spawn(
                 function()
                     tweenTo(commandBar, "Quint", "Out", 0.5, {Position = UDim2.new(0.5, -100, 1, -60)})
                 end
             )
         end
         if isOpen == false then
-            spawn(
+            task.spawn(
                 function()
                     tweenTo(commandBar, "Quint", "Out", 0.5, {Position = UDim2.new(0.5, -100, 1, 5)})
                 end
@@ -178,18 +178,18 @@ do
             end
             if enterPressed then
                 local commandText = commandBar.Input.Text:gsub("^" .. "%" .. commandPrefix, "")
-                spawn(
+                task.spawn(
                     function()
                         setCommandBarOpen(false)
                     end
                 )
-                spawn(
+                task.spawn(
                     function()
                         execCmd(commandText, Players.LocalPlayer, true)
                     end
                 )
             end
-            wait()
+            task.wait()
             if not commandBar.Input:IsFocused() then
                 commandBar.Input.Text = ""
             end
@@ -260,12 +260,12 @@ do
                             else
                                 if string.match(predictLabel.Text, " ") then
                                     commandBar.Input.Text = predictLabel.Text
-                                    wait()
+                                    task.wait()
                                     commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
                                     commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
                                 else
                                     commandBar.Input.Text = predictLabel.Text .. " "
-                                    wait()
+                                    task.wait()
                                     commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
                                     commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
                                 end
@@ -282,7 +282,7 @@ do
     IYMouse.KeyDown:Connect(
         function(keyPressed)
             if tostring(string.lower(keyPressed)) == commandPrefix then
-                spawn(
+                task.spawn(
                     function()
                         setCommandBarOpen(true)
                     end

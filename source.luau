@@ -2,7 +2,7 @@ local getGlobalEnv = function()
     return ((getgenv and getgenv()) or shared or _G)
 end
 local commandPrefix = getGlobalEnv()._NewPrefix or "'"
-if not getGlobalEnv().IY_LOADED then
+if not getGlobalEnv().ZY_LOADED then
     loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/zero-yield/zero-yield@refs/heads/builds/source.min.luau"))()
 end
 do
@@ -279,7 +279,7 @@ do
         end
     )
 
-    IYMouse.KeyDown:Connect(
+    ZYMouse.KeyDown:Connect(
         function(keyPressed)
             if tostring(string.lower(keyPressed)) == commandPrefix then
                 task.spawn(

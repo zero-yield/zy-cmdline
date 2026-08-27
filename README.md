@@ -30,6 +30,20 @@ This sets up:
 - **[StyLua](https://github.com/JohnnyMorganz/StyLua)** — Lua/Luau formatter
 - **[selene](https://github.com/Kampfkarren/selene)** — Lua/Luau linter
 
+### Pre-commit
+
+This project uses [pre-commit](https://pre-commit.com/) to enforce formatting, linting, and conventional commits on every commit. Install the hooks after cloning:
+
+```sh
+pre-commit install --install-hooks
+```
+
+The hooks run automatically on `git commit`:
+
+- **stylua** — formats Luau files
+- **selene** — lints Luau files
+- **commitlint** — validates commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
+
 ### Formatting
 
 ```sh

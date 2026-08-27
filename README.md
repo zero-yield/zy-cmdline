@@ -12,5 +12,5 @@ loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/zero-yield/zy-cmdline@refs/
 
 ### Images
 
-<img src="https://github.com/Toon-arch/iy-cmdline/blob/main/images/1.png" alt="Command Line Preview">
-<img src="https://github.com/Toon-arch/iy-cmdline/blob/main/images/2.png" alt="Command Line Preview">
+<img src="https://github.com/zero-yield/zy-cmdline/blob/main/images/1.png" alt="Command Line Preview">
+<img src="https://github.com/zero-yield/zy-cmdline/blob/main/images/2.png" alt="Command Line Preview">

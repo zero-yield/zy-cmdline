@@ -6,7 +6,7 @@
 ```luau
 local env = function() return ((getgenv and getgenv()) or shared or _G) end
 env()._NewPrefix = "'" -- change to the prefix you want
-env()._UseBetaRelease = false
+env()._UseBetaRelease = false -- whetever to use beta release
 loadstring(game:HttpGet("https://cdn.jsdelivr.net/gh/zero-yield/zy-cmdline@refs/heads/main/source.luau"))()
 ```
 

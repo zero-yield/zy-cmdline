@@ -1,0 +1,23 @@
+---
+base: roblox
+lua_versions:
+  - luau
+globals:
+  getgenv:
+    args: []
+  shared:
+    property: read-only
+  _G:
+    property: read-only
+  PARENT:
+    args: []
+  Players:
+    any: true
+  execCmd:
+    any: true
+  cargs:
+    args: []
+  cmds:
+    args: []
+  ZYMouse:
+    any: true

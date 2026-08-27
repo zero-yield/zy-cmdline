@@ -8,7 +8,9 @@ local useBetaRelease: boolean = getGlobalEnv()._UseBetaRelease or false
 if not getGlobalEnv().ZY_LOADED then
 	-- selene: allow(incorrect_standard_library_use)
 	if useBetaRelease then
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/zero-yield/zero-yield/refs/heads/builds/source.min.luau"))()
+		loadstring(
+			game:HttpGet("https://raw.githubusercontent.com/zero-yield/zero-yield/refs/heads/builds/source.min.luau")
+		)()
 	else
 		loadstring(game:HttpGet("https://github.com/zero-yield/zero-yield/releases/latest/download/source.min.luau"))()
 	end
@@ -94,7 +96,13 @@ do
 	local commandBar: Frame = createCommandBarUI()
 	commandBar.Parent = PARENT
 
-	local tweenTo = function(instance: Instance, easingStyle: string, easingDirection: string, duration: number, properties: { [string]: any }): Tween
+	local tweenTo = function(
+		instance: Instance,
+		easingStyle: string,
+		easingDirection: string,
+		duration: number,
+		properties: { [string]: any }
+	): Tween
 		local tweenService = game:GetService("TweenService")
 		local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle[easingStyle], Enum.EasingDirection[easingDirection])
 		local tween = tweenService:Create(instance, tweenInfo, properties)
@@ -244,27 +252,29 @@ do
 
 	commandBar.Input.Focused:Connect(function()
 		local userInputService = game:GetService("UserInputService")
-		inputBeganConnection = userInputService.InputBegan:Connect(function(inputObject: InputObject, _gameProcessed: boolean)
-			if commandBar.Input:IsFocused() then
-				if inputObject.KeyCode == Enum.KeyCode.Tab then
-					if predictLabel.Text ~= "" then
-						if string.match(predictLabel.Text, " ") then
-							commandBar.Input.Text = predictLabel.Text
-							task.wait()
-							commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
-							commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
-						else
-							commandBar.Input.Text = predictLabel.Text .. " "
-							task.wait()
-							commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
-							commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
+		inputBeganConnection = userInputService.InputBegan:Connect(
+			function(inputObject: InputObject, _gameProcessed: boolean)
+				if commandBar.Input:IsFocused() then
+					if inputObject.KeyCode == Enum.KeyCode.Tab then
+						if predictLabel.Text ~= "" then
+							if string.match(predictLabel.Text, " ") then
+								commandBar.Input.Text = predictLabel.Text
+								task.wait()
+								commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
+								commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
+							else
+								commandBar.Input.Text = predictLabel.Text .. " "
+								task.wait()
+								commandBar.Input.Text = commandBar.Input.Text:gsub("\t", "")
+								commandBar.Input.CursorPosition = #commandBar.Input.Text + 1
+							end
 						end
 					end
+				else
+					inputBeganConnection:Disconnect()
 				end
-			else
-				inputBeganConnection:Disconnect()
 			end
-		end)
+		)
 	end)
 
 	ZYMouse.KeyDown:Connect(function(keyPressed: string)
